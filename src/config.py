@@ -7,7 +7,6 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT_DIR / ".env")
 
 # AMD ROCm / Hardware Configuration
-# Set defaults if not already present in environment
 if "HSA_OVERRIDE_GFX_VERSION" not in os.environ:
     os.environ["HSA_OVERRIDE_GFX_VERSION"] = "11.0.0"
 if "HIP_VISIBLE_DEVICES" not in os.environ:
@@ -17,16 +16,12 @@ if "TORCH_BLAS_PREFER_HIPBLASLT" not in os.environ:
 
 DEVICE = os.getenv("DEVICE", "cuda:0")
 
-# Model & SAE Configuration
-MODEL_NAME = os.getenv("MODEL_NAME", "google/gemma-2-2b-it")
-SAE_RELEASE = os.getenv("SAE_RELEASE", "gemma-scope-2b-pt-res")
-DEFAULT_SAE_ID = os.getenv("DEFAULT_SAE_ID", "layer_12/width_16k/canonical")
-
-# Default exploration range for Gemma 2 2B (26 layers total)
-FEATURE_HUNTING_LAYERS = list(range(10, 21))
+# Default Model Selection ('gpt2-small' for instant ungated, or 'gemma-2-2b-it' via unsloth mirror)
+DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "gpt2-small")
+PREFER_UNGATED = os.getenv("PREFER_UNGATED", "true").lower() in ["true", "1", "yes"]
 
 # Default steering scaling sweep
-ALPHA_SWEEP = [0.0, 0.5, 1.0, 2.0, 3.0, 5.0]
+ALPHA_SWEEP = [0.0, 0.5, 1.0, 2.0, 3.5, 5.0]
 
 # File paths
 DATA_DIR = ROOT_DIR / "data"

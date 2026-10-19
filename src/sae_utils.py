@@ -2,35 +2,15 @@ import torch
 from typing import Dict, List, Tuple, Optional
 from sae_lens import SAE
 from transformer_lens import HookedTransformer
-from src.config import DEVICE, SAE_RELEASE
-
-
-def load_sae_for_layer(
-    layer: int,
-    release: str = SAE_RELEASE,
-    width: str = "16k",
-    device: str = DEVICE,
-) -> SAE:
-    """
-    Loads a pre-trained SAE for the specified layer from Gemma Scope.
-    E.g. release='gemma-scope-2b-pt-res', sae_id='layer_12/width_16k/canonical'
-    """
-    sae_id = f"layer_{layer}/width_{width}/canonical"
-    sae, cfg_dict, sparsity = SAE.from_pretrained(
-        release=release,
-        sae_id=sae_id,
-        device=device,
-    )
-    sae.eval()
-    return sae
+from src.config import DEVICE
+from src.model_utils import load_sae, load_model, get_model_specs
 
 
 def compute_feature_activation_deltas(
     model: HookedTransformer,
     sae: SAE,
-    layer: int,
+    hook_point: str,
     prompt_pairs: List[Dict],
-    hook_point: Optional[str] = None,
     device: str = DEVICE,
 ) -> Tuple[torch.Tensor, List[int]]:
     """
@@ -42,9 +22,6 @@ def compute_feature_activation_deltas(
         deltas: Tensor of shape (d_sae,) with Delta Act for each feature.
         top_feature_indices: Sorted list of feature indices with largest positive deltas.
     """
-    if hook_point is None:
-        hook_point = f"blocks.{layer}.hook_resid_post"
-
     prompts_a = [p["prompt_a"] for p in prompt_pairs]
     prompts_b = [p["prompt_b"] for p in prompt_pairs]
 
@@ -53,7 +30,7 @@ def compute_feature_activation_deltas(
 
     model.eval()
     with torch.no_grad():
-        # Process prompts_a (biased/sycophantic)
+        # Process prompts_a (biased/sycophantic incentive)
         for prompt in prompts_a:
             _, cache = model.run_with_cache(
                 prompt,
@@ -82,7 +59,7 @@ def compute_feature_activation_deltas(
     mean_a = stacked_a.mean(dim=0)
     mean_b = stacked_b.mean(dim=0)
 
-    deltas = mean_a - mean_b  # Positive means higher in sycophantic context
+    deltas = mean_a - mean_b  # Positive means higher activation in sycophantic context
 
     # Sort in descending order
     top_indices = torch.argsort(deltas, descending=True).tolist()
@@ -99,7 +76,6 @@ def extract_steering_vector(
     Extracts the decoder direction W_dec[feature_idx] for the given SAE feature.
     Shape: (d_model,)
     """
-    # W_dec shape is usually (d_sae, d_model) in SAELens
     if hasattr(sae, "W_dec"):
         vec = sae.W_dec[feature_idx].detach().clone()
     else:
