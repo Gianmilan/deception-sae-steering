@@ -208,7 +208,7 @@ def main():
     parser.add_argument("--split-ratio", type=float, default=0.7, help="Dataset split ratio for feature hunting")
     parser.add_argument("--prompt", type=str, default=None, help="Custom prompt for steering evaluation")
     parser.add_argument("--alpha", type=float, default=None, help="Specific alpha steering coefficient")
-    parser.add_argument("--max-tokens", type=int, default=80, help="Max new tokens to generate")
+    parser.add_argument("--max-tokens", type=int, default=150, help="Max new tokens to generate")
 
     args = parser.parse_args()
 
