@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "domain": "astrophysics",
+    "text": "The solar system consists of the Sun and the objects that orbit it, whether directly or indirectly. Of the objects that orbit the Sun directly, the largest are the eight planets, with the remainder being smaller objects, such as dwarf planets and small Solar System bodies. The four inner system planets are terrestrial planets, being composed primarily of rock and metal."
+  },
+  {
+    "id": 2,
+    "domain": "cellular_biology",
+    "text": "Cellular respiration is a set of metabolic reactions and processes that take place in the cells of organisms to convert biochemical energy from nutrients into adenosine triphosphate, and then release waste products. The reactions involved in respiration are catabolic reactions, which break large molecules into smaller ones."
+  },
+  {
+    "id": 3,
+    "domain": "history_and_civilization",
+    "text": "The Renaissance was a fervent period of European cultural, artistic, political and economic rebirth following the Middle Ages. Generally described as taking place from the 14th century to the 17th century, the Renaissance promoted the rediscovery of classical philosophy, literature and art."
+  },
+  {
+    "id": 4,
+    "domain": "computer_science",
+    "text": "In computer science, algorithms are unambiguous specifications for performing calculation, data processing, automated reasoning, and other tasks. An algorithm is an effective method that can be expressed within a finite amount of space and time and in a well-defined formal language for calculating a function."
+  },
+  {
+    "id": 5,
+    "domain": "environmental_geology",
+    "text": "Plate tectonics is the generally accepted scientific theory that considers the Earth's lithosphere to comprise a number of large tectonic plates which have been slowly moving since about 3.4 billion years ago. The model builds on the concept of continental drift, an idea developed during the first decades of the twentieth century."
+  }
+]

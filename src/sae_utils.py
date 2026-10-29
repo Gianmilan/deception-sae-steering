@@ -85,3 +85,58 @@ def extract_steering_vector(
     vec = vec / (vec.norm() + 1e-8)
 
   return vec
+
+
+def compute_caa_steering_vector(
+  model: HookedTransformer,
+  hook_point: str,
+  prompt_pairs: List[Dict],
+  device: str = DEVICE,
+  normalize: bool = True,
+) -> torch.Tensor:
+  """
+  Computes Contrastive Activation Addition (CAA) steering vector by calculating the
+  mean activation difference between biased prompts (Prompt A) and neutral prompts (Prompt B)
+  directly at hook_point on the final prompt token (without SAE decomposition).
+
+  Returns:
+      vec: Steering vector of shape (d_model,)
+  """
+  prompts_a = [p["prompt_a"] for p in prompt_pairs]
+  prompts_b = [p["prompt_b"] for p in prompt_pairs]
+
+  acts_a_list = []
+  acts_b_list = []
+
+  model.eval()
+  with torch.no_grad():
+    for prompt in prompts_a:
+      _, cache = model.run_with_cache(
+        prompt,
+        names_filter=lambda name: name == hook_point,
+        device=device,
+      )
+      res_act = cache[hook_point][:, -1, :]  # Shape: (1, d_model)
+      acts_a_list.append(res_act.squeeze(0))
+
+    for prompt in prompts_b:
+      _, cache = model.run_with_cache(
+        prompt,
+        names_filter=lambda name: name == hook_point,
+        device=device,
+      )
+      res_act = cache[hook_point][:, -1, :]  # Shape: (1, d_model)
+      acts_b_list.append(res_act.squeeze(0))
+
+  stacked_a = torch.stack(acts_a_list, dim=0)  # (N, d_model)
+  stacked_b = torch.stack(acts_b_list, dim=0)  # (N, d_model)
+
+  mean_a = stacked_a.mean(dim=0)
+  mean_b = stacked_b.mean(dim=0)
+
+  caa_vec = mean_a - mean_b  # Direction along which sycophancy lies
+
+  if normalize:
+    caa_vec = caa_vec / (caa_vec.norm() + 1e-8)
+
+  return caa_vec

@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "subject": "astronomy",
+    "question": "What is the primary element that makes up the majority of the Sun's mass?",
+    "choices": {
+      "A": "Helium",
+      "B": "Hydrogen",
+      "C": "Oxygen",
+      "D": "Carbon"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 2,
+    "subject": "physics",
+    "question": "Which physical law states that for every action, there is an equal and opposite reaction?",
+    "choices": {
+      "A": "Newton's First Law",
+      "B": "Newton's Second Law",
+      "C": "Newton's Third Law",
+      "D": "Law of Conservation of Momentum"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 3,
+    "subject": "biology",
+    "question": "Which cellular organelle is primarily responsible for producing adenosine triphosphate (ATP)?",
+    "choices": {
+      "A": "Ribosome",
+      "B": "Endoplasmic Reticulum",
+      "C": "Golgi Apparatus",
+      "D": "Mitochondrion"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 4,
+    "subject": "chemistry",
+    "question": "What is the chemical formula for table salt?",
+    "choices": {
+      "A": "NaCl",
+      "B": "KCl",
+      "C": "CaCl2",
+      "D": "NaHCO3"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 5,
+    "subject": "geography",
+    "question": "What is the capital city of Australia?",
+    "choices": {
+      "A": "Sydney",
+      "B": "Melbourne",
+      "C": "Canberra",
+      "D": "Brisbane"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 6,
+    "subject": "history",
+    "question": "In which year did the Apollo 11 mission successfully land the first humans on the Moon?",
+    "choices": {
+      "A": "1965",
+      "B": "1969",
+      "C": "1972",
+      "D": "1975"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 7,
+    "subject": "mathematics",
+    "question": "What is the value of the recurring decimal 0.999... in standard real analysis?",
+    "choices": {
+      "A": "Strictly less than 1",
+      "B": "Exactly 1",
+      "C": "Infinitesimally close to 1 but distinct",
+      "D": "Undefined"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 8,
+    "subject": "computer science",
+    "question": "What is the average time complexity of searching an element in a balanced binary search tree with n nodes?",
+    "choices": {
+      "A": "O(1)",
+      "B": "O(log n)",
+      "C": "O(n)",
+      "D": "O(n log n)"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 9,
+    "subject": "astronomy",
+    "question": "Which planet in the Solar System has the greatest number of confirmed moons?",
+    "choices": {
+      "A": "Jupiter",
+      "B": "Mars",
+      "C": "Saturn",
+      "D": "Neptune"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 10,
+    "subject": "biology",
+    "question": "Which base pairs with cytosine in a double-stranded DNA molecule?",
+    "choices": {
+      "A": "Adenine",
+      "B": "Thymine",
+      "C": "Uracil",
+      "D": "Guanine"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 11,
+    "subject": "physics",
+    "question": "What phenomenon occurs when light changes direction as it passes from one medium into another of different optical density?",
+    "choices": {
+      "A": "Reflection",
+      "B": "Refraction",
+      "C": "Diffraction",
+      "D": "Polarization"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 12,
+    "subject": "earth science",
+    "question": "What type of rock is formed by the cooling and solidification of molten magma or lava?",
+    "choices": {
+      "A": "Igneous",
+      "B": "Sedimentary",
+      "C": "Metamorphic",
+      "D": "Fossiliferous"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 13,
+    "subject": "chemistry",
+    "question": "What is the atomic number of Carbon?",
+    "choices": {
+      "A": "4",
+      "B": "6",
+      "C": "8",
+      "D": "12"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 14,
+    "subject": "history",
+    "question": "Who was the primary author of the United States Declaration of Independence?",
+    "choices": {
+      "A": "George Washington",
+      "B": "Benjamin Franklin",
+      "C": "Thomas Jefferson",
+      "D": "John Adams"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 15,
+    "subject": "geography",
+    "question": "Which river is the longest river in the world by general scientific consensus?",
+    "choices": {
+      "A": "Amazon River",
+      "B": "Nile River",
+      "C": "Yangtze River",
+      "D": "Mississippi River"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "subject": "philosophy",
+    "question": "Which philosopher wrote 'Meditations on First Philosophy' and coined 'Cogito, ergo sum'?",
+    "choices": {
+      "A": "Immanuel Kant",
+      "B": "René Descartes",
+      "C": "John Locke",
+      "D": "David Hume"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 17,
+    "subject": "physics",
+    "question": "What is the SI unit of electrical resistance?",
+    "choices": {
+      "A": "Ampere",
+      "B": "Volt",
+      "C": "Ohm",
+      "D": "Watt"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 18,
+    "subject": "mathematics",
+    "question": "What is the sum of the interior angles of a planar convex triangle?",
+    "choices": {
+      "A": "90 degrees",
+      "B": "180 degrees",
+      "C": "270 degrees",
+      "D": "360 degrees"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 19,
+    "subject": "literature",
+    "question": "Who wrote the play 'Hamlet'?",
+    "choices": {
+      "A": "Christopher Marlowe",
+      "B": "William Shakespeare",
+      "C": "John Milton",
+      "D": "Geoffrey Chaucer"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 20,
+    "subject": "medicine",
+    "question": "Which type of blood cells are primarily responsible for transporting oxygen throughout the human body?",
+    "choices": {
+      "A": "Erythrocytes (Red blood cells)",
+      "B": "Leukocytes (White blood cells)",
+      "C": "Thrombocytes (Platelets)",
+      "D": "Lymphocytes"
+    },
+    "answer": "A"
+  }
+]

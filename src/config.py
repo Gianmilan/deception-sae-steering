@@ -26,5 +26,7 @@ ALPHA_SWEEP = [0.0, 0.5, 1.0, 2.0, 3.5, 5.0]
 # File paths
 DATA_DIR = ROOT_DIR / "data"
 SYCOPHANCY_DATASET_PATH = DATA_DIR / "sycophancy_pairs.json"
+GENERAL_QA_PATH = DATA_DIR / "general_qa_eval.json"
+PERPLEXITY_CORPUS_PATH = DATA_DIR / "perplexity_corpus.json"
 OUTPUT_DIR = ROOT_DIR / "outputs"
 OUTPUT_DIR.mkdir(exist_ok=True)

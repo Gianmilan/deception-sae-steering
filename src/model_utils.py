@@ -11,7 +11,7 @@ from src.config import DEVICE
 
 SUPPORTED_CONFIGS: Dict[str, Dict[str, Any]] = {
   "gpt2-small": {
-    "tl_name": "gpt2-small",
+    "tl_name": "gpt2",
     "ungated_repo": "gpt2",
     "is_gated": False,
     "num_layers": 12,
@@ -31,7 +31,7 @@ SUPPORTED_CONFIGS: Dict[str, Dict[str, Any]] = {
     "default_layer": 12,
     "hunting_layers": list(range(10, 21)),
     "sae_release": "gemma-scope-2b-pt-res",
-    "sae_id_template": "layer_{layer}/width_16k/canonical",
+    "sae_id_template": "layer_{layer}/width_16k/average_l0_82",
     "hook_point_template": "blocks.{layer}.hook_resid_post",
     "default_alpha": 1.5,
     "dtype": torch.bfloat16,
@@ -95,14 +95,14 @@ def load_model(
     ungated_repo,
     torch_dtype=dtype,
     low_cpu_mem_usage=True,
-  )
+  ).to(device)
   model = TransformerBridge.boot_transformers(
     tl_name,
     hf_model=hf_model,
     tokenizer=tokenizer,
     device=device,
     dtype=dtype,
-  )
+  ).to(device)
   return model, specs
 
 
@@ -125,6 +125,22 @@ def load_sae(
 
   release = specs["sae_release"]
   sae_id = specs["sae_id_template"].format(layer=layer)
+
+  # For Gemma-Scope, find exact match or matching width_16k average_l0
+  if release == "gemma-scope-2b-pt-res":
+    try:
+      from sae_lens.loading.pretrained_saes_directory import get_pretrained_saes_directory
+      d = get_pretrained_saes_directory()
+      if release in d:
+        candidates = [k for k in d[release].saes_map.keys() if f"layer_{layer}/width_16k/" in k]
+        # Prefer ~70-90 L0 or the first candidate
+        preferred = [c for c in candidates if any(f"l0_{val}" in c for val in range(70, 95))]
+        if preferred:
+          sae_id = preferred[0]
+        elif candidates:
+          sae_id = candidates[0]
+    except Exception:
+      pass
 
   print(f"Loading SAE: release='{release}', sae_id='{sae_id}' on {device}...")
   # sae_lens 6.x from_pretrained returns SAE object directly

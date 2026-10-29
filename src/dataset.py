@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
-from src.config import SYCOPHANCY_DATASET_PATH
+from src.config import SYCOPHANCY_DATASET_PATH, GENERAL_QA_PATH, PERPLEXITY_CORPUS_PATH
 
 
 def load_sycophancy_dataset(
@@ -47,6 +47,34 @@ def get_prompt_pairs(
     eval_set = shuffled[split_idx:]
 
     return train_tuning_set, eval_set
+
+
+def load_general_qa_dataset(
+    filepath: Optional[Path] = None,
+) -> List[Dict]:
+    """
+    Loads neutral multiple-choice QA evaluation dataset (MMLU-style).
+    """
+    path = filepath or GENERAL_QA_PATH
+    if not Path(path).exists():
+        raise FileNotFoundError(f"General QA dataset not found at {path}")
+
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_perplexity_corpus(
+    filepath: Optional[Path] = None,
+) -> List[Dict]:
+    """
+    Loads neutral text samples for language model perplexity evaluation.
+    """
+    path = filepath or PERPLEXITY_CORPUS_PATH
+    if not Path(path).exists():
+        raise FileNotFoundError(f"Perplexity corpus not found at {path}")
+
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 if __name__ == "__main__":
